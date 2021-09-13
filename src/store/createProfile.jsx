@@ -36,7 +36,7 @@ const initialState = {
         Gender: {Gender : '', inValid : false},
         DOB: {DOB : '', inValid : false},
         Category: "",
-        Sub_Category: '',
+        Sub_Category: {Sub_Category: ""},
         ID_Proof: {ID_Proof : '',},
         ID_Code: {ID_Code : '',},
         Status: {Status : '',},

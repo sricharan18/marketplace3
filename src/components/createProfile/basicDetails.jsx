@@ -90,14 +90,14 @@ class BasicDetails extends React.Component{
             this.CategoryIDs = res.data.map((item, id) => {return item.id})
         })
 
-        if (this.props.fields.Category !== ""){
-            this.subCategory = <Input 
-            divClass="form-group col-md-4" label="Sub-Category" 
-            config = {{className :"form-control form-select" ,}}
-            elementType="select"
-            options = {this.state.sub_options} value={this.props.fields.Sub_Category}
-            change={(event) => {this.handleChange("Sub_Category", {}, event); localStorage.setItem("subCat",JSON.stringify(this.subCategoryIDs[this.state.sub_options.indexOf(event.target.value)]))}}/>
-        }
+        // if (this.props.fields.Category !== ""){
+        //     this.subCategory = <Input 
+        //     divClass="form-group col-md-4" label="Sub-Category" 
+        //     config = {{className :"form-control form-select" ,}}
+        //     elementType="select"
+        //     options = {this.state.sub_options} value={this.props.fields.Sub_Category}
+        //     change={(event) => {this.handleChange("Sub_Category", {}, event); localStorage.setItem("subCat",JSON.stringify(this.subCategoryIDs[this.state.sub_options.indexOf(event.target.value)]))}}/>
+        // }
 
     }
 
@@ -163,7 +163,6 @@ class BasicDetails extends React.Component{
     handleSubCategory = async (id , event) => {
         await axios.get('api/allsubcategories/'+id, {headers : this.headers}).then((res) => 
     {
-        console.log(res)
         this.setState({sub_options : res.data.map((item, id) => {return item.name})})
         this.subCategoryIDs = res.data.map((item) => {return item})
 
@@ -171,7 +170,7 @@ class BasicDetails extends React.Component{
                 divClass="form-group col-md-4" label="Sub-Category" 
                 config = {{className :"form-control form-select" ,}}
                 elementType="select"
-                options = {this.state.sub_options} value={this.props.fields.Sub_Category}
+                options = {["select"].concat(this.state.sub_options)} 
                 change={(event) => {this.handleChange("Sub_Category", {}, event); localStorage.setItem("subCat",JSON.stringify(this.subCategoryIDs[this.state.sub_options.indexOf(event.target.value)]))}}/>
         this.forceUpdate()
     })
@@ -305,7 +304,7 @@ class BasicDetails extends React.Component{
                                             divClass="form-group col-md-4" label="Status" 
                                             config = {{className :"form-control form-select" ,}}
                                             elementType="select"
-                                            options = {["Select", "Blue Collar", "IT"] }
+                                            options = {["Select", "Actively applying", "Casually looking", "exploring marketplace "] }
                                             value = {this.props.fields.Status.Status}
                                             inValid = {this.props.fields.Status.inValid}
                                             change={this.handleChange.bind(this,"Status",{select : true})}
@@ -315,8 +314,8 @@ class BasicDetails extends React.Component{
                                             divClass="form-group col-md-4" label="Language" 
                                             config = {{className :"form-control form-select" ,}}
                                             elementType="select" 
-                                            options = {["Select", "English", "Physician", "Surgeon", 
-                                            "Technical", "Others"] }
+                                            options = {["Select", "English", "Hindi", "Tamil", 
+                                            "Telugu", "Others"] }
                                             value = {this.props.fields.Language.Language}
                                             inValid = {this.props.fields.Language.inValid}
                                             change={this.handleChange.bind(this,"Language",{select : true})}/>
@@ -327,8 +326,8 @@ class BasicDetails extends React.Component{
                                     divClass="form-group" label="Current Location" 
                                     config = {{className :"form-control form-select" ,}}
                                     elementType="select" name="Location"
-                                    options = {["Select", "English", "Physician", "Surgeon", 
-                                    "Technical", "Others"] }
+                                    options = {["Select", "Hyderabad", "Mumbai", "Delhi", 
+                                    "Noida", "Others"] }
                                     value={this.props.fields.CurrentLocation.CurrentLocation}
                                     inValid = {this.props.fields.CurrentLocation.inValid}
                                     change={this.handleChange.bind(this,"CurrentLocation",{select : true})}/>
